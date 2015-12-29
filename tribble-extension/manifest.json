@@ -1,0 +1,47 @@
+{
+  "manifest_version": 2,
+
+  "name": "Tribble",
+  "description": "This extension gets the translation of selected words",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "storage",
+    "https://ajax.googleapis.com/"
+  ],
+
+    "background": {
+    "scripts": [
+      // "popup.js",
+        "jquery.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "jquery.js",
+        "bootbox.min.js",
+        "bootstrap.min.js",
+        "content-script.js"
+        ]
+     }
+  ]
+
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - tribbledb@localhost" uuid="970d0624-0612-4f98-9b8c-c321086b1ecc">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>tribbledb.*</schema-pattern>
+      <default-schemas>tribbledb.*</default-schemas>
+    </data-source>
+  </component>
+</project>

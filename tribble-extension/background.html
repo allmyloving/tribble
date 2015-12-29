@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body { 
+                min-width: 420px; 
+                overflow-x: hidden; 
+                font-family: Arial, sans-serif; 
+                font-size: 12px; 
+            }
+            input, textarea { 
+                width: 420px; 
+            }
+            input#save { 
+                font-weight: bold; width: auto; 
+            }
+        </style>
+        <script type="text/javascript" src="background.js"></script>
+		<script type="text/javascript" src="jquery.js"></script>
+    </head>
+    <body>
+        <form id="loginForm">
+            <p><label for="email">Email</label><br />
+            <input type="text" id="email" name="email" size="50" value="" /></p>
+            <p><label for="url">Password</label><br />
+            <input type="password" id="password" name="password" size="50" value="" /></p>
+            <p>
+                <input id="loginSubmit" type="button" value="Login" />
+            </p>
+        </form>
+    </body>
+</html>

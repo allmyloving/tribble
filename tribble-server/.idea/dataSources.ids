@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - tribbledb@localhost" uuid="970d0624-0612-4f98-9b8c-c321086b1ecc">
+    <database-info product="MySQL" version="5.6.27-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.2">
+      <schema id="1" name="tribbledb"/>
+      <table id="2" parent="1" name="language"/>
+      <table id="3" parent="1" name="translation"/>
+      <table id="4" parent="1" name="user"/>
+      <column id="5" parent="2" name="language_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="6" parent="2" name="code">
+        <mandatory>1</mandatory>
+        <data-type>varchar(2)</data-type>
+      </column>
+      <index id="7" parent="2" name="UK_5h2eb4yggd9jjo1x9kd594t02">
+        <columns>code</columns>
+        <unique>1</unique>
+      </index>
+      <key id="8" parent="2" name="PRIMARY">
+        <columns>language_id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="9" parent="2" name="UK_5h2eb4yggd9jjo1x9kd594t02">
+        <columns>code</columns>
+        <underlying-index>UK_5h2eb4yggd9jjo1x9kd594t02</underlying-index>
+      </key>
+      <column id="10" parent="3" name="translationId">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="11" parent="3" name="source">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="12" parent="3" name="target">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="13" parent="3" name="source_lang_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="14" parent="3" name="target_lang_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="15" parent="3" name="user_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <key id="16" parent="3" name="PRIMARY">
+        <columns>translationId</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="17" parent="3" name="FK_3btgxvg4tvr530mkwr3rk9g6b">
+        <columns>target_lang_id</columns>
+        <ref-key>language.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="18" parent="3" name="FK_74jrrnp7trrv7rcmgnf0pgdea">
+        <columns>source_lang_id</columns>
+        <ref-key>language.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="19" parent="3" name="FK_ioo0hl5fjknlvf0krwgas91oj">
+        <columns>user_id</columns>
+        <ref-key>user.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="20" parent="4" name="user_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="21" parent="4" name="email">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="22" parent="4" name="password">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <index id="23" parent="4" name="UK_ob8kqyqqgmefl0aco34akdtpe">
+        <columns>email</columns>
+        <unique>1</unique>
+      </index>
+      <key id="24" parent="4" name="PRIMARY">
+        <columns>user_id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="25" parent="4" name="UK_ob8kqyqqgmefl0aco34akdtpe">
+        <columns>email</columns>
+        <underlying-index>UK_ob8kqyqqgmefl0aco34akdtpe</underlying-index>
+      </key>
+    </database-model>
+  </data-source>
+</component>

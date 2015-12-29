@@ -1,0 +1,11 @@
+com\tribble\config\DbConfig.class
+com\tribble\hash\PasswordHash.class
+com\tribble\service\impl\UserServiceImpl.class
+com\tribble\config\AppConfig.class
+com\tribble\controller\UserController.class
+com\tribble\service\UserService.class
+com\tribble\dao\UserDao.class
+com\tribble\controller\TranslationController.class
+com\tribble\config\MvcConfig.class
+com\tribble\dao\impl\UserDaoImpl.class
+com\tribble\entity\User.class
