@@ -10,7 +10,8 @@ import com.tribble.db.service.UserService;
 import com.tribble.exception.BadRequestException;
 import com.tribble.exception.LanguageNotFoundException;
 import com.tribble.exception.UserNotFoundException;
-import com.tribble.util.TranslationUtil;
+import com.tribble.translation.GoogleTranslationHandler;
+import com.tribble.translation.TranslationHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,12 +28,12 @@ public class TranslationController {
 
     @Autowired
     private UserService userService;
-
     @Autowired
     private TranslationService translationService;
-
     @Autowired
     private LanguageService languageService;
+    @Autowired
+    private TranslationHandler translationHandler;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public void addTranslation(@RequestParam("userId") Long userId,
@@ -72,12 +73,11 @@ public class TranslationController {
                             @RequestParam("target") String target,
                             @RequestParam("q") String q) {
         String response = null;
-        URI uri = TranslationUtil.buildURI(source, target, q);
-        HttpURLConnection connection = null;
-        System.out.println("q ==> " + q);
+        URI uri = translationHandler.buildURI(source, target, q);
+        System.out.println("uri ==> " + uri);
         System.out.println("RESPONSE");
         try {
-            connection = (HttpURLConnection) uri.toURL().openConnection();
+            HttpURLConnection  connection = (HttpURLConnection) uri.toURL().openConnection();
             connection.setRequestMethod("GET");
 
             int code = connection.getResponseCode();

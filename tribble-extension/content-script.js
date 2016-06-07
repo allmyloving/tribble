@@ -26,7 +26,6 @@ $(document).ready(function(){
         console.log("lang ==> " + targetLang);
         console.log("selection=" + getSelectedText());
 
-
         $.ajax({
             async: false,
             type: 'GET',
@@ -36,50 +35,27 @@ $(document).ready(function(){
                 q: text
             },
             success: function(data, status) {
-                console.log("Data: " + data + "\nStatus: " + status);
-                var translation = JSON.parse(data).data.translations[0];
-                res = translation.translatedText;
-                sourceLang = translation.detectedSourceLanguage;
+                console.log("Data: " + JSON.parse(data) + "\nStatus: " + status);
+                var translation = JSON.parse(data);
+                var res = translation.text;
+                sourceLang = translation.lang.slice(0,2);
                 console.log("translated: " + res);
-            }
-        });
-
-		showPopup(function() {
+                
+            showSuccessPopup(res, function() {
 //                        var userId = getUserId();
 //                        console.log("before redirect ==> " + userId);
-                        addTranslation(sourceLang, targetLang, text, res).done(function() {
-                            alert('done, check db');
-                        });});
-//        bootbox.dialog({
-//            message: 'Translated text: ' + res,
-//            title: 'tribble',
-//            buttons: {
-//                main: {
-//                    label: 'Add translation',
-//                    className: 'btn-success',
-//                    callback: function() {
-////                        var userId = getUserId();
-////                        console.log("before redirect ==> " + userId);
-//                        addTranslation(sourceLang, targetLang, text, res).done(function() {
-//                            alert('done, check db');
-//                        });
-//                    }
-//                },
-//                close: {
-//                    label: 'Close',
-//                    className: 'btn-primary',
-//                    callback: function() {
-//                        return;
-//                    }
-//                }
-//            }
-//        });
+                        addTranslation(sourceLang, targetLang, text, res);
+                        });
+            }
+            
+            });
+
     });
 });
 
-function showPopup(addcallback){
+function showSuccessPopup(text, addcallback){
 	 bootbox.dialog({
-            message: 'Translated text: ' + res,
+            message: 'Translated text: ' + text,
             title: 'tribble',
             buttons: {
                 close: {
@@ -92,12 +68,6 @@ function showPopup(addcallback){
                 main: {
                     label: 'Add translation',
                     className: 'btn-success',
-//                    callback: function() {
-////                        var userId = getUserId();
-////                        console.log("before redirect ==> " + userId);
-//                        addTranslation(sourceLang, targetLang, text, res).done(function() {
-//                            alert('done, check db');
-//                        });
 					callback: addcallback
                     }
                 }
@@ -117,52 +87,25 @@ function getUserId(callback) {
 }
 
 function addTranslation(sourceLang, targetLang, source, target) {
-    var r = $.Deferred;
-
-    chrome.runtime.sendMessage({
-        method: "getUserId"
-    }, function(response) {
-        console.log("id from background: " + response.userId);
-        userId = response.userId;
-//		console.log(userId);
-//		console.log(sourceLang);
-//		console.log(targetLang);
-//		console.log(source);
-//		console.log(target);
-		
-		
-//		 $.ajax({
-//            async: false,
-//            type: 'POST',
-//            url: 'http://localhost:8080/translate/create',
-//            data: {
-//                userId: userId,
-//                sourceLang: sourceLang,
-//                targetLang: targetLang,
-//                source: source,
-//                target: target
-//            },
-//            success: function(data, status) {
-//                alert('added!!');
-//            }
-//        });
-		
-        $.post("http://localhost:8080/translate/create", {
-                userId: userId,
+    console.log("target: " + target);
+    target="asdf";
+        var userId = 1;
+		  $.ajax({
+            async: false,
+            type: 'POST',
+            url: 'http://localhost:8080/translate/create',
+            data: {
+                 userId: 1,
                 sourceLang: sourceLang,
                 targetLang: targetLang,
                 source: source,
                 target: target
-            })
-            .done(function(data) {
-                alert('added!!');
-            })
-            .fail(function() {
+            }}).success(function(data){
+                       alert('added');
+                       })
+          .fail(function(data) {
+            console.log(data);
                 alert('you have to login first');
             });
-        setTimeout(function() {
-            r.resolve();
-        }, 2500);
-    });
-    return r;
+
 }

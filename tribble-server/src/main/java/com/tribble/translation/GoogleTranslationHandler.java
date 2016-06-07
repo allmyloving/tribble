@@ -1,16 +1,17 @@
-package com.tribble.util;
+package com.tribble.translation;
 
+import com.tribble.translation.TranslationHandler;
 import org.apache.http.client.utils.URIBuilder;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public final class TranslationUtil {
+public final class GoogleTranslationHandler implements TranslationHandler {
 
 
     private static final String KEY = "AIzaSyDc5z8zob0IqtuLBp49WI8I2ouj2V6AHgI";
 
-    public static URI buildURI(String source, String target, String q) {
+    public URI buildURI(String source, String target, String q) {
         URIBuilder builder = new URIBuilder();
         builder.addParameter("key", KEY);
         if (source != null) {
@@ -23,7 +24,7 @@ public final class TranslationUtil {
         try {
             uri = builder.build();
         } catch (URISyntaxException e) {
-            System.out.println("URI exception occured " + e.getMessage());
+            System.out.println("URI exception occurred " + e.getMessage());
         }
         return uri;
     }

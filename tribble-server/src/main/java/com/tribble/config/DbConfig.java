@@ -13,9 +13,14 @@ import com.tribble.db.service.UserService;
 import com.tribble.db.service.impl.LanguageServiceImpl;
 import com.tribble.db.service.impl.TranslationServiceImpl;
 import com.tribble.db.service.impl.UserServiceImpl;
+import com.tribble.translation.TranslationHandler;
+import com.tribble.translation.YandexTranslationHandler;
+import org.apache.catalina.connector.Connector;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.context.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -35,7 +40,6 @@ import java.util.Properties;
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
 public class DbConfig {
-
 
     @Inject
     private Environment environment;
@@ -107,6 +111,11 @@ public class DbConfig {
     @Bean(name = "translationService")
     public TranslationService getTranslationService() {
         return new TranslationServiceImpl();
+    }
+
+    @Bean(name = "translationHandler")
+    public TranslationHandler getTranslationHandler() {
+        return new YandexTranslationHandler();
     }
 
     @Bean(name = "languageDao")
